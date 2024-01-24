@@ -1,0 +1,24 @@
+import java.util.*;
+class Solution {
+    int res = 0;
+
+     void solveDFS(TreeNode root, Set<Integer> set){
+        if(root == null) return;
+
+        if(set.contains(root.val)) set.remove(root.val);
+
+        else set.add(root.val);
+
+        if(root.left == null && root.right == null){
+            if(set.size() <= 1) res++;
+
+        }
+            solveDFS(root.left, new HashSet(set));
+            solveDFS(root.right, new HashSet(set));
+    }
+    public int pseudoPalindromicPaths (TreeNode root) {
+        Set<Integer> set = new HashSet<>();
+        solveDFS(root,set);
+        return res;
+    }
+}
